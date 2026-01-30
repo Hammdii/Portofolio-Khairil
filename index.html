@@ -99,13 +99,28 @@
       gap: 1rem;
     }
 
-    .skill {
-      background: #020617;
-      padding: 1rem;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+.skill {
+  background: #020617;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.read-more-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.read-more-btn:hover {
+  opacity: 0.8;
+}
 
     /* Modal */
     .modal {
@@ -164,6 +179,58 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: var(--accent);
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      opacity: 0.8;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -210,28 +277,81 @@ bekerja secara terstruktur, analitis, dan berorientasi pada solusi teknologi.
     <h2>Projects</h2>
     <div class="projects">
 
-      <div class="card project-card" onclick="openModal('smoke')">
+      <div class="card project-card">
         <img src="assets/smoke.jpg" alt="IoT Smoke Monitoring">
         <h3>IoT Smoke Monitoring</h3>
         <p>Sistem pemantauan asap rokok</p>
+        <button class="read-more-btn" onclick="openModal('smoke')">Read More</button>
       </div>
 
-      <div class="card project-card" onclick="openModal('electric')">
+      <div class="card project-card">
         <img src="assets/smartlistrik.jpeg" alt="Pemantauan Listrik">
         <h3>Pemantauan Listrik</h3>
         <p>Monitoring konsumsi daya listrik</p>
+        <button class="read-more-btn" onclick="openModal('electric')">Read More</button>
       </div>
 
-      <div class="card project-card" onclick="openModal('fire')">
+      <div class="card project-card">
         <img src="assets/flame.jpeg" alt="Deteksi Kebakaran">
         <h3>Deteksi Kebakaran</h3>
         <p>Sistem deteksi dini kebakaran</p>
+        <button class="read-more-btn" onclick="openModal('fire')">Read More</button>
       </div>
 
     </div>
   </div>
-</section>
+  </section>
 
+  <section id="graphic-design">
+    <div class="section-box">
+      <h2>Graphic Design</h2>
+      <div class="carousel">
+        <div class="carousel-container" id="carouselContainer">
+          <div class="carousel-slide">
+            <img src="assets/design1.jpeg" alt="Design 1">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design2.jpeg" alt="Design 2">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design3.jpeg" alt="Design 3">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design4.jpeg" alt="Design 4">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design5.jpeg" alt="Design 5">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design6.png" alt="Design 6">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design8.png" alt="Design 8">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design9.jpeg" alt="Design 9">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/deesign10.jpeg" alt="Design 10">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design11.jpeg" alt="Design 11">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design12.jpeg" alt="Design 12">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design13.jpeg" alt="Design 13">
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/design14.jpeg" alt="Design 14">
+          </div>
+        </div>
+        <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+  </section>
 
   <!-- Modal -->
   <div class="modal" id="projectModal">
@@ -336,6 +456,29 @@ informasi dan kegiatan organisasi.
       const modal = document.getElementById('projectModal');
       if (e.target === modal) closeModal();
     }
+
+    // Carousel functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      const container = document.getElementById('carouselContainer');
+      container.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    // Auto slide every 5 seconds
+    setInterval(nextSlide, 5000);
   </script>
 
 </body>
