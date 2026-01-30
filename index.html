@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khairil Hamdi | IT Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 0.75rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section-box {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill {
+      background: #020617;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 14px;
+      max-height: 85vh;
+  overflow-y: auto;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content img {
+      max-height: 280px;
+  object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="assets/Profil.jpg" alt="Khairil Hamdi" class="profile-img" />
+    <h1>Khairil Hamdi</h1>
+    <p>IT Enthusiast | Web & IoT Developer | ESP32 • Firebase • Web Technology</p>
+  </header>
+
+  <section id="about">
+  <div class="section-box">
+    <h2>About Me</h2>
+    <p>
+      Saya Khairil Hamdi, lulusan Teknik Komputer dari Universitas Teknologi Yogyakarta
+dengan minat pada pengembangan sistem IT, khususnya Web Development dan Internet
+of Things (IoT). Berpengalaman membangun sistem monitoring berbasis ESP32, sensor,
+dan Firebase, serta mengintegrasikan perangkat IoT dengan aplikasi web. Terbiasa
+bekerja secara terstruktur, analitis, dan berorientasi pada solusi teknologi.
+
+    </p>
+  </div>
+</section>
+
+
+  <section id="skills">
+  <div class="section-box">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">HTML, CSS, JavaScript</div>
+      <div class="skill">ESP32 & IoT System</div>
+      <div class="skill">Firebase Realtime DB</div>
+      <div class="skill">Figma</div>
+      <div class="skill">Canva</div>
+      <div class="skill">Basic Networking</div>
+      <div class="skill">Office</div>
+    </div>
+  </div>
+</section>
+
+
+  <section id="projects">
+  <div class="section-box">
+    <h2>Projects</h2>
+    <div class="projects">
+
+      <div class="card project-card" onclick="openModal('smoke')">
+        <img src="assets/smoke.jpg" alt="IoT Smoke Monitoring">
+        <h3>IoT Smoke Monitoring</h3>
+        <p>Sistem pemantauan asap rokok</p>
+      </div>
+
+      <div class="card project-card" onclick="openModal('electric')">
+        <img src="assets/smartlistrik.jpeg" alt="Pemantauan Listrik">
+        <h3>Pemantauan Listrik</h3>
+        <p>Monitoring konsumsi daya listrik</p>
+      </div>
+
+      <div class="card project-card" onclick="openModal('fire')">
+        <img src="assets/flame.jpeg" alt="Deteksi Kebakaran">
+        <h3>Deteksi Kebakaran</h3>
+        <p>Sistem deteksi dini kebakaran</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- Modal -->
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="Project Image" />
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+      <p id="modalTech"></p>
+    </div>
+  </div>
+
+  <section id="experience">
+  <div class="section-box">
+    <h2>Experience</h2>
+      <p>
+        <strong>PROYEK TUGAS AKHIR</strong><br>
+        Perancangan dan implementasi sistem IoT untuk monitoring asap rokok berbasis web
+        dan mobile menggunakan ESP32, Firebase, dan MIT App Inventor.
+      </p><br>
+      <p>
+        <strong>PROYEK SOSIAL – KAPMI MENGABDI III</strong><br>
+            Berperan dalam perencanaan dan pelaksanaan kegiatan pengabdian masyarakat, termasuk
+            koordinasi panitia, pelaksanaan program sosial, serta pengelolaan komunikasi dengan pihak
+            internal dan masyarakat setempat guna memastikan kegiatan berjalan efektif dan tepat
+            sasaran.
+      </p><br>
+      <p>
+        <strong>PROYEK EDUKASI – KUNJUNGAN INDUSTRI HIMTEK X HMSI</strong><br>
+        Terlibat dalam koordinasi dan pelaksanaan kegiatan kunjungan industri, termasuk pengelolaan
+        peserta dan komunikasi dengan pihak perusahaan
+      </p><br>
+      <p>
+        <strong>TIM INFOKOM – DESIGN DAN PUBLIKASI MEDIA</strong><br>
+        
+Membuat desain poster dan konten publikasi digital untuk mendukung penyampaian
+informasi dan kegiatan organisasi.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+  <div class="section-box">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:khairilhamdi10@gmail.com">khairilhamdi10@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/khairil-hamdi/" target="_blank">linkedin.com/in/khairil-hamdi</a></p>
+    <p>GitHub: <a href="https://github.com/Hammdii" target="_blank">github.com/Hammdii</a></p>
+  </div>
+</section>
+
+
+  <footer>
+    © 2026 Khairil Hamdi. Built with HTML, CSS, and JavaScript.
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    const projects = {
+      smoke: {
+        title: 'IoT Smoke Monitoring',
+        image: 'assets/smoke.jpg',
+        description: 'Sistem IoT untuk memantau asap rokok menggunakan ESP32 dan sensor MQ-135. Data dikirim ke Firebase dan ditampilkan real-time melalui web dan aplikasi mobile.',
+        tech: 'ESP32, MQ-135, Firebase, HTML, JavaScript'
+      },
+      electric: {
+        title: 'Pemantauan Listrik',
+        image: 'assets/smartlistrik.jpeg',
+        description: 'Sistem monitoring konsumsi listrik untuk memantau tegangan, arus, dan daya secara real-time berbasis IoT.',
+        tech: 'ESP32, Sensor Arus, Blynk, Web Dashboard'
+      },
+      fire: {
+        title: 'Deteksi Kebakaran',
+        image: 'assets/flame.jpeg',
+        description: 'Sistem deteksi dini kebakaran menggunakan sensor api dan suhu dengan notifikasi peringatan berbasis IoT.',
+        tech: 'ESP32, Flame Sensor, Temperature Sensor, Telegram'
+      }
+    };
+
+    function openModal(key) {
+      const project = projects[key];
+      document.getElementById('modalImage').src = project.image;
+      document.getElementById('modalTitle').innerText = project.title;
+      document.getElementById('modalDescription').innerText = project.description;
+      document.getElementById('modalTech').innerHTML = '<strong>Tech Stack:</strong> ' + project.tech;
+      document.getElementById('projectModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('projectModal').style.display = 'none';
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById('projectModal');
+      if (e.target === modal) closeModal();
+    }
+  </script>
+
+</body>
+</html>
