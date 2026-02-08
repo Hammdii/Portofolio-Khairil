@@ -26,6 +26,43 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.2) 0%, transparent 50%);
+      filter: blur(50px);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .code-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+      filter: blur(1px);
+      font-family: 'Courier New', monospace;
+      color: #e5e7eb;
+      font-size: 14px;
+      line-height: 1.4;
+      white-space: pre;
+      pointer-events: none;
+      overflow: hidden;
     }
 
     header {
@@ -79,6 +116,12 @@
       border-radius: 12px;
       margin-bottom: 1.5rem;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
     }
 
     .projects {
@@ -234,6 +277,7 @@
   </style>
 </head>
 <body>
+  <div class="code-bg" id="codeBg"></div>
 
   <header>
     <img src="assets/Profil.jpg" alt="Khairil Hamdi" class="profile-img" />
@@ -479,6 +523,124 @@ informasi dan kegiatan organisasi.
 
     // Auto slide every 5 seconds
     setInterval(nextSlide, 5000);
+
+    // Create random background shapes
+    function createRandomShapes() {
+      const numShapes = 50;
+      const shapeTypes = ['circle', 'rectangle', 'triangle', 'x'];
+      for (let i = 0; i < numShapes; i++) {
+        const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.style.position = 'absolute';
+        svg.style.left = Math.random() * 100 + '%';
+        svg.style.top = Math.random() * 100 + '%';
+        const size = Math.random() * 80 + 20; // 20-100px
+        svg.style.width = size + 'px';
+        svg.style.height = size + 'px';
+        svg.style.zIndex = '-2';
+        svg.style.pointerEvents = 'none';
+        svg.style.filter = 'blur(2px)';
+
+        const color = `rgba(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, 0.4)`;
+
+        if (shapeType === 'circle') {
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', '50');
+          circle.setAttribute('cy', '50');
+          circle.setAttribute('r', '40');
+          circle.setAttribute('stroke', color);
+          circle.setAttribute('stroke-width', '3');
+          circle.setAttribute('fill', 'none');
+          svg.appendChild(circle);
+        } else if (shapeType === 'rectangle') {
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', '10');
+          rect.setAttribute('y', '10');
+          rect.setAttribute('width', '80');
+          rect.setAttribute('height', '80');
+          rect.setAttribute('stroke', color);
+          rect.setAttribute('stroke-width', '3');
+          rect.setAttribute('fill', 'none');
+          svg.appendChild(rect);
+        } else if (shapeType === 'triangle') {
+          const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          polygon.setAttribute('points', '50,10 10,90 90,90');
+          polygon.setAttribute('stroke', color);
+          polygon.setAttribute('stroke-width', '3');
+          polygon.setAttribute('fill', 'none');
+          svg.appendChild(polygon);
+        } else if (shapeType === 'x') {
+          const line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line1.setAttribute('x1', '20');
+          line1.setAttribute('y1', '20');
+          line1.setAttribute('x2', '80');
+          line1.setAttribute('y2', '80');
+          line1.setAttribute('stroke', color);
+          line1.setAttribute('stroke-width', '3');
+          const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line2.setAttribute('x1', '80');
+          line2.setAttribute('y1', '20');
+          line2.setAttribute('x2', '20');
+          line2.setAttribute('y2', '80');
+          line2.setAttribute('stroke', color);
+          line2.setAttribute('stroke-width', '3');
+          svg.appendChild(line1);
+          svg.appendChild(line2);
+        }
+
+        document.body.appendChild(svg);
+      }
+    }
+
+    // Generate shapes on page load
+    createRandomShapes();
+
+    // Generate code background
+    function generateCodeBackground() {
+      const codeBg = document.getElementById('codeBg');
+      const lines = [];
+      const keywords = ['function', 'const', 'let', 'var', 'if', 'else', 'for', 'while', 'return', 'import', 'export', 'class', 'extends', 'async', 'await'];
+      const functions = ['console.log', 'setTimeout', 'fetch', 'addEventListener', 'querySelector', 'createElement', 'appendChild'];
+      const variables = ['data', 'result', 'element', 'response', 'callback', 'index', 'item', 'value'];
+
+      for (let i = 0; i < 100; i++) {
+        let line = '';
+        const indent = '  '.repeat(Math.floor(Math.random() * 4));
+        const type = Math.random();
+
+        if (type < 0.3) {
+          // Variable declaration
+          const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+          const variable = variables[Math.floor(Math.random() * variables.length)];
+          line = `${indent}${keyword} ${variable} = ${Math.random() > 0.5 ? `'${variable}'` : Math.floor(Math.random() * 100)};`;
+        } else if (type < 0.6) {
+          // Function call
+          const func = functions[Math.floor(Math.random() * functions.length)];
+          const args = Math.random() > 0.5 ? `'arg'` : Math.floor(Math.random() * 10);
+          line = `${indent}${func}(${args});`;
+        } else if (type < 0.8) {
+          // Comment
+          line = `${indent}// ${['TODO', 'FIXME', 'NOTE', 'HACK'][Math.floor(Math.random() * 4)]}: ${variables[Math.floor(Math.random() * variables.length)]}`;
+        } else {
+          // Control structure
+          const control = ['if', 'for', 'while'][Math.floor(Math.random() * 3)];
+          if (control === 'if') {
+            line = `${indent}${control} (${variables[Math.floor(Math.random() * variables.length)]} > ${Math.floor(Math.random() * 10)}) {`;
+          } else if (control === 'for') {
+            line = `${indent}${control} (let i = 0; i < ${Math.floor(Math.random() * 10)}; i++) {`;
+          } else {
+            line = `${indent}${control} (${variables[Math.floor(Math.random() * variables.length)]}) {`;
+          }
+        }
+
+        lines.push(line);
+      }
+
+      codeBg.textContent = lines.join('\n');
+    }
+
+    // Generate code background on load
+    generateCodeBackground();
   </script>
 
 </body>
