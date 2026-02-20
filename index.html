@@ -138,6 +138,8 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
       position: relative;
       overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .card::before {
@@ -149,6 +151,12 @@
       bottom: 0;
       background: var(--gradient-overlay);
       pointer-events: none;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 40px rgba(0, 212, 255, 0.25), 0 8px 20px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+      border-color: var(--neon-blue);
     }
 
     .projects {
@@ -196,6 +204,13 @@
       bottom: 0;
       background: var(--gradient-overlay);
       pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .skill:hover {
+      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+      border-color: var(--neon-blue);
     }
 
     .read-more-btn {
@@ -208,6 +223,13 @@
       font-size: 0.9rem;
       margin-top: 1rem;
       box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .read-more-btn:hover {
+      background: var(--neon-blue);
+      color: var(--bg-dark);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
     }
 
     /* Modal */
@@ -279,6 +301,12 @@
       color: var(--neon-blue);
       text-decoration: none;
       text-shadow: 0 0 10px var(--neon-blue-glow);
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-shadow: 0 0 20px var(--neon-blue-glow);
     }
 
     /* Carousel */
@@ -328,6 +356,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--neon-blue);
+      color: var(--bg-dark);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
     }
 
     .prev {
@@ -358,6 +393,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.3s ease;
     }
 
     .navbar.scrolled {
@@ -375,11 +411,29 @@
       font-size: 0.9rem;
       font-weight: 500;
       position: relative;
+      transition: all 0.3s ease;
     }
 
     .navbar a:hover {
       color: var(--neon-blue);
       background: rgba(0, 212, 255, 0.1);
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--neon-blue);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .navbar a:hover::after {
+      width: 60%;
     }
 
     .navbar-toggle {
@@ -390,6 +444,7 @@
       font-size: 1.5rem;
       cursor: pointer;
       padding: 4px 10px;
+      transition: all 0.3s ease;
     }
 
     @media (max-width: 768px) {
