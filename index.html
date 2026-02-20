@@ -8,11 +8,14 @@
   <script src="jsnav.js"></script>
   <style>
     :root {
-      --bg: #0f172a;
-      --card: #111827;
+      --bg-dark: #0a0a0f;
+      --glass-bg: rgba(15, 23, 42, 0.4);
+      --glass-border: rgba(56, 189, 248, 0.3);
+      --neon-blue: #00d4ff;
+      --neon-blue-glow: rgba(0, 212, 255, 0.5);
       --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #38bdf8;
+      --text-muted: #9ca3af;
+      --gradient-overlay: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
     }
 
     * {
@@ -23,28 +26,15 @@
     }
 
     body {
-      background: var(--bg);
+      background: var(--bg-dark);
       color: var(--text);
       line-height: 1.6;
       position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.2) 0%, transparent 50%);
-      filter: blur(50px);
-      opacity: 0.6;
-      pointer-events: none;
-      z-index: -1;
+      background-image: 
+        radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0) 0%, var(--bg-dark) 100%);
+      background-attachment: fixed;
     }
 
     .code-bg {
@@ -54,7 +44,7 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.05;
+      opacity: 0.03;
       filter: blur(1px);
       font-family: 'Courier New', monospace;
       color: #e5e7eb;
@@ -76,28 +66,50 @@
       height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--accent);
+      border: 3px solid var(--neon-blue);
+      box-shadow: 0 0 20px var(--neon-blue-glow);
       margin-bottom: 1.5rem;
     }
 
     header h1 {
       font-size: 2.5rem;
       font-weight: 700;
+      text-shadow: 0 0 30px var(--neon-blue-glow);
     }
 
     header p {
-      color: var(--muted);
+      color: var(--text-muted);
       margin-top: 0.75rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
     }
+
     .section-box {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 60px rgba(0, 212, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-overlay);
+      pointer-events: none;
+    }
 
     section {
       padding: 4rem 1.5rem;
@@ -108,21 +120,35 @@
     section h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      color: var(--accent);
+      color: var(--neon-blue);
+      text-shadow: 0 0 20px var(--neon-blue-glow);
     }
 
     .card {
-      background: var(--card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       padding: 1.5rem;
-      border-radius: 12px;
+      border-radius: 20px;
       margin-bottom: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(0, 212, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
     }
 
-    .card:hover {
-      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2);
-      transform: translateY(-2px);
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-overlay);
+      pointer-events: none;
     }
 
     .projects {
@@ -133,8 +159,9 @@
 
     .project-card img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 14px;
       margin-bottom: 1rem;
+      border: 1px solid var(--glass-border);
     }
 
     .skills {
@@ -143,55 +170,92 @@
       gap: 1rem;
     }
 
-.skill {
-  background: #020617;
-  padding: 1rem;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 0.9rem;
-}
+    .skill {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1rem;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 212, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
 
-.read-more-btn {
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-}
+    .skill::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-overlay);
+      pointer-events: none;
+    }
 
-.read-more-btn:hover {
-  opacity: 0.8;
-}
+    .read-more-btn {
+      background: transparent;
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    }
 
     /* Modal */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
 
     .modal-content {
-      background: var(--card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
       padding: 2rem;
-      border-radius: 14px;
+      border-radius: 20px;
       max-height: 85vh;
-  overflow-y: auto;
+      overflow-y: auto;
       position: relative;
-      animation: fadeIn 0.3s ease;
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(0, 212, 255, 0.1);
+    }
+
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-overlay);
+      pointer-events: none;
+      border-radius: 20px;
     }
 
     .modal-content img {
       max-height: 280px;
-  object-fit: cover;
-      border-radius: 10px;
+      object-fit: cover;
+      border-radius: 14px;
       margin-bottom: 1rem;
+      border: 1px solid var(--glass-border);
     }
 
     .close-btn {
@@ -200,28 +264,21 @@
       right: 16px;
       font-size: 1.5rem;
       cursor: pointer;
-      color: var(--muted);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      color: var(--text-muted);
+      z-index: 10;
     }
 
     footer {
       padding: 2rem 1.5rem;
       text-align: center;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 0.85rem;
     }
 
     a {
-      color: var(--accent);
+      color: var(--neon-blue);
       text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      text-shadow: 0 0 10px var(--neon-blue-glow);
     }
 
     /* Carousel */
@@ -248,24 +305,29 @@
       height: auto;
       max-height: 400px;
       object-fit: contain;
-      border-radius: 10px;
+      border-radius: 14px;
+      border: 1px solid var(--glass-border);
     }
 
     .carousel-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: none;
-      color: var(--accent);
-      border: none;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--neon-blue);
+      border: 1px solid var(--glass-border);
       padding: 0.5rem;
       cursor: pointer;
       font-size: 1.2rem;
       z-index: 10;
-    }
-
-    .carousel-btn:hover {
-      opacity: 0.8;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .prev {
@@ -285,24 +347,24 @@
       z-index: 999;
       padding: 12px 30px;
       border-radius: 50px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.6);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid var(--glass-border);
       box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(0, 212, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
     }
 
     .navbar.scrolled {
       top: 10px;
       padding: 10px 24px;
       background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      border: 1px solid var(--glass-border);
     }
 
     .navbar a {
@@ -312,30 +374,12 @@
       border-radius: 25px;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: all 0.3s ease;
       position: relative;
     }
 
     .navbar a:hover {
-      color: var(--accent);
-      background: rgba(56, 189, 248, 0.15);
-    }
-
-    .navbar a::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-      border-radius: 2px;
-    }
-
-    .navbar a:hover::after {
-      width: 60%;
+      color: var(--neon-blue);
+      background: rgba(0, 212, 255, 0.1);
     }
 
     .navbar-toggle {
@@ -371,7 +415,7 @@
         gap: 4px;
         margin-top: 12px;
         padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid var(--glass-border);
       }
 
       .navbar-links.active {
@@ -767,4 +811,3 @@ informasi dan kegiatan organisasi.
 
 </body>
 </html>
-
