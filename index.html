@@ -626,6 +626,7 @@ bekerja secara terstruktur, analitis, dan berorientasi pada solusi teknologi.
       <h3 id="modalTitle"></h3>
       <p id="modalDescription"></p>
       <p id="modalTech"></p>
+      <p id="modalGithub"></p>
     </div>
   </div>
 
@@ -688,19 +689,22 @@ informasi dan kegiatan organisasi.
         title: 'IoT Smoke Monitoring',
         image: 'assets/smoke.jpg',
         description: 'Sistem IoT untuk memantau asap rokok menggunakan ESP32 dan sensor MQ-135. Data dikirim ke Firebase dan ditampilkan real-time melalui web dan aplikasi mobile.',
-        tech: 'ESP32, MQ-135, Firebase, HTML, JavaScript'
+        tech: 'ESP32, MQ-135, Firebase, HTML, JavaScript',
+        github: 'https://github.com/Hammdii/IoT-Smoke-Monitoring-ESP32.git'
       },
       electric: {
         title: 'Pemantauan Listrik',
         image: 'assets/smartlistrik.jpeg',
         description: 'Sistem monitoring konsumsi listrik untuk memantau tegangan, arus, dan daya secara real-time berbasis IoT.',
-        tech: 'ESP32, Sensor Arus, Blynk, Web Dashboard'
+        tech: 'ESP32, Sensor Arus, Blynk, Web Dashboard',
+        github: 'https://github.com/Hammdii/Smart-Electricity-Monitoring-ESP32.git'
       },
       fire: {
         title: 'Deteksi Kebakaran',
         image: 'assets/flame.jpeg',
         description: 'Sistem deteksi dini kebakaran menggunakan sensor api dan suhu dengan notifikasi peringatan berbasis IoT.',
-        tech: 'ESP32, Flame Sensor, Temperature Sensor, Telegram'
+        tech: 'ESP32, Flame Sensor, Temperature Sensor, Telegram',
+        github: 'https://github.com/Hammdii/Fire-Detection-System-ESP32.git'
       }
     };
 
@@ -710,6 +714,7 @@ informasi dan kegiatan organisasi.
       document.getElementById('modalTitle').innerText = project.title;
       document.getElementById('modalDescription').innerText = project.description;
       document.getElementById('modalTech').innerHTML = '<strong>Tech Stack:</strong> ' + project.tech;
+      document.getElementById('modalGithub').innerHTML = project.github ? '<strong>Repository:</strong> <a href="' + project.github + '" target="_blank">' + project.github + '</a>' : '';
       document.getElementById('projectModal').style.display = 'flex';
     }
 
